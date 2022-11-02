@@ -1,0 +1,290 @@
+{% extends 'base.html' %} 
+{% block title %}Home{% endblock title %}
+<style>
+ 
+.border{
+  border-bottom:1px solid #F1F1F1;
+  margin-bottom:10px;
+}
+.main-secction{
+  box-shadow: 10px 10px 10px;
+}
+.image-section{
+  padding: 0px;
+}
+.image-section img{
+  width: 100%;
+  height:250px;
+  position: relative;
+}
+.user-image{
+  position: absolute;
+  margin-top:-50px;
+}
+.user-left-part{
+  margin: 0px;
+}
+.user-image img{
+  width:100px;
+  height:100px;
+}
+.user-profil-part{
+  padding-bottom:30px;
+  background-color:#FAFAFA;
+}
+.follow{
+  width:50%;
+  margin-top:70px;
+  font-size:12px;
+  border:1px solid #DDDDDD;
+  background-color: #fff;
+  font-weight: 600; 
+}
+.user-detail-row{
+  margin:0px; 
+}
+.user-detail-section2 p{
+  font-size:12px;
+  padding: 0px;
+  margin: 0px;
+}
+.user-detail-section2{
+  margin-top:10px;
+}
+.user-detail-section2 span{
+  color:#7CBBC3;
+  font-size: 20px;
+}
+.user-detail-section2 small{
+  font-size:12px;
+  color:#D3A86A;
+}
+.profile-right-section{
+  padding: 20px 0px 10px 15px;
+  background-color: #FFFFFF;  
+}
+.profile-right-section-row{
+  margin: 0px;
+}
+.profile-header-section1 h1{
+  font-size: 25px;
+  margin: 0px;
+}
+.profile-header-section1 p{
+  color:#878787;
+}
+.req-btn{
+  height:30px;
+  font-size:12px;
+}
+.profile-tag{
+  padding: 10px;
+  border:1px solid #F6F6F6;
+}
+.profile-tag p{
+  font-size: 12px;
+  color:#ADADAD;
+}
+.profile-tag i{
+  color:#ADADAD;
+  font-size: 20px;
+}
+.image-right-part{
+  background-color: #FCFCFC;
+  margin: 0px;
+  padding: 5px;
+}
+.img-main-rightPart{
+  background-color: #FCFCFC;
+}
+.image-right-detail{
+  padding: 0px;
+}
+.image-right-detail p{
+  font-size: 12px;
+}
+.image-right-detail a:hover{
+  text-decoration: none;
+}
+.image-right img{
+  width: 100%;
+}
+.image-right-detail-section2{
+  margin: 0px;
+}
+.image-right-detail-section2 p{
+  color:#38ACDF;
+  margin:0px;
+}
+.image-right-detail-section2 span{
+  color:#7F7F7F;
+}
+</style>
+{% block body %} 
+
+
+<div id="carouselExampleCaptions" class="carousel slide " data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="media/img1.jpg" class="d-block w-100" style="height: 600px;width: 1200px;">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Go Cashless...</h5>
+          <p>We accept all type of Payments.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="media/img2.jpg" class="d-block w-100"  style="height:600px;width: 1200px;">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Cheapest Premium</h5>
+          <p>We are having plans for Premium starting at rupees 10.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="media/img3.jpg" class="d-block w-100"  style="height: 600px;width: 1200px;">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>No BTC!!</h5>
+          <p>We are not accepting Bitcoin anymore due to some problem at our banking end.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!--for loop usage for multiple cards take the br tag also-->
+
+  <!-- FOR FWTCHING DATA FROM DATA BASE WHICH WILL STORE AT REG
+  {% for reg in reg %}
+    <li style="color: blanchedalmond;">{{reg.name}} </li>
+    <li style="color: blanchedalmond;">{{reg.email}} </li>
+    <li style="color: blanchedalmond;">{{reg.password}} </li>
+    <li style="color: blanchedalmond;">{{reg.date}} </li> 
+
+  {% endfor %}
+  
+  {% for reg in reg %}
+ <div class="container pt-5">
+    <div class="card text-center">
+        <div class="card-header">
+          Featured
+        </div>
+        <div class="card-body ">
+          <h5 class="card-title">Name : {{reg.name}}</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="card-footer text-muted">
+          {{reg.date}}
+        </div>
+      </div>
+      <br>
+  </div>
+
+{% endfor %} 
+
+-->
+
+
+    
+    <!-- end row -->
+  
+  <div class="container main-secction" style="margin-top: 5%; color: black; background-color:whitesmoke;">
+    <div class="row">
+        
+        <div class="row user-left-part">
+            <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
+                <div class="row ">
+                    
+                    
+                    <div class="row user-detail-row">
+                        <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
+                        <div class="border"></div>
+                            <p>FOLLOWER</p>
+                            <span>320</span>
+                        </div>
+                        <div class="col-md-12 col-sm-12 user-detail-section2 pull-right">
+                            <div class="border"></div>
+                            <p>FOLLOWING</p>
+                            <span>147</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 user-detail-section2">
+                        <div class="border"></div>
+                        <p>PERFORMANCE</p>
+                        <span>56 <small>and 42 review</small></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
+                <div class="row profile-right-section-row">
+                    <div class="col-md-12 profile-header">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
+                                <h1>{{reg.name}}</h1>
+                                <p>Senior Architect</p> 
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 text-right pull-rigth">
+                                <button class="btn btn-info req-btn"> View Profile </button>                          
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8  profile-tag-section text-center">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 profile-tag">
+                                        <a href="#"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>
+                                        <p>info</p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 profile-tag">
+                                        <a href="#"><i class="fa fa-address-book" aria-hidden="true"></i></a>
+                                        <p>feed</p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 profile-tag">
+                                        <a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i></a>
+                                        <p>Agenda</p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 profile-tag">
+                                        <a href="#"><i class="fa fa-paperclip" aria-hidden="true"></i></a>
+                                        <p>Resume</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 img-main-rightPart">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row image-right-part">
+                                            <div class="col-md-6 pull-left image-right-detail">
+                                                <p>{{reg.date}}</p>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-12 image-right-detail-section2">
+                                        <p>Urban planning consulation</p>
+                                        <span>Lorem ipsum dolor sit amet, consectetur adipisibj.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+
+  {% endblock body %}

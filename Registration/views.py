@@ -2,11 +2,14 @@ from django.shortcuts import redirect, render
 from Registration.models import Register
 from django.contrib import messages
 from django.views.decorators.cache import cache_page
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.utils.decorators import method_decorator
 
-# Create your views here.
+
 def index(request):
     return render(request, 'index.html')
-@cache_page(60 * 15)
+@cache_page(60)
 def login(request):
     
     if request.method == "POST":

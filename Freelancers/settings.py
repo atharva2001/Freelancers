@@ -56,17 +56,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Freelancers.urls'
 
-# CACHES = {
-#    'default': {
-#       'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-#       'LOCATION': '/var/tmp/django_cache',
-#    }
-# }
-
-# CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
-# CACHE_MIDDLEWARE_SECONDS = '600'    # number of seconds to cache a page for (TTL)
-# CACHE_MIDDLEWARE_KEY_PREFIX = ''    # should be used if the cache is shared across multiple sites that use the same Django instance
-
 
 TEMPLATES = [
     {
@@ -141,3 +130,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+CACHES = {
+    'default' : {
+        'BACKEND' : 'django.core.cache.backends.db.DatabaseCache',
+        'Location' : 'my_cache_table',
+    }
+}

@@ -1,9 +1,12 @@
 from django.shortcuts import redirect, render
 from Registration.models import Register
 from django.contrib import messages
+from django.views.decorators.cache import cache_page
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+@cache_page(60 * 15)
 def login(request):
     
     if request.method == "POST":

@@ -49,20 +49,23 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'Freelancers.urls'
 
-CACHES = {
-   'default': {
-      'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-      'LOCATION': '/var/tmp/django_cache',
-   }
-}
+# CACHES = {
+#    'default': {
+#       'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#       'LOCATION': '/var/tmp/django_cache',
+#    }
+# }
 
+# CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
+# CACHE_MIDDLEWARE_SECONDS = '600'    # number of seconds to cache a page for (TTL)
+# CACHE_MIDDLEWARE_KEY_PREFIX = ''    # should be used if the cache is shared across multiple sites that use the same Django instance
 
 
 TEMPLATES = [

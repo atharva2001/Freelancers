@@ -304,7 +304,7 @@ footer a {
 <br>
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form method="POST" id="one" value="Sign Up">
+		<form target="_blank" method="POST" id="one" value="Sign Up">
 			{%csrf_token%}
 			<h1>Create Account</h1>
 			
@@ -317,7 +317,7 @@ footer a {
 	</div>
     <div class="form-container sign-in-container">
 		
-		<form method="POST" id="two">
+		<form method="POST" id="two" target="_blank">
 			{%csrf_token%}
 			<h1>Sign in</h1>
 			

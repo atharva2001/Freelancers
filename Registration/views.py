@@ -1,8 +1,6 @@
 from django.shortcuts import redirect, render
 from Registration.models import Register
 from django.contrib import messages
-from django.views.decorators.cache import cache_page
-from django.conf import settings
 import smtplib
 from email.message import EmailMessage
 from Registration import get_mails
@@ -54,6 +52,7 @@ def profile(request):
     return render(request, 'profile.html', context)
 
 def emails(request):
+    print(request.session['email'])
     msg = EmailMessage()
     msg['Subject'] = 'Verification!!'
     msg['From'] = "atharvashirkre77@gmail.com"
@@ -77,6 +76,7 @@ def confirm(request):
 
     # registers.save()
     reg = Register.objects.filter(email=request.session['email']).exists() 
+    
     if reg != True:
         registers.save()
         # reg = Register.objects.get(email=request.session['email'])

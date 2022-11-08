@@ -49,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'clearcache',
+    # 'django.contrib.admin',
     # 'django.middleware.cache.UpdateCacheMiddleware',
     # 'django.middleware.common.CommonMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
@@ -131,9 +133,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-CACHES = {
-    'default' : {
-        'BACKEND' : 'django.core.cache.backends.db.DatabaseCache',
-        'Location' : 'my_cache_table',
-    }
-}
+# CACHES = {
+#     'default' : {
+#         'BACKEND' : 'django.core.cache.backends.db.DatabaseCache',
+#         'Location' : 'my_cache_table',
+#     }
+# }

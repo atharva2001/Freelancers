@@ -16,8 +16,8 @@ def login(request):
             request.session['name'] = request.POST.get("name")
             request.session['email'] = request.POST.get("email")
             request.session['password'] = request.POST.get("password")
-            registers = Register(name=request.session['name'], email=request.session['email'],
-                                    password=request.session['password'])
+            # registers = Register(name=request.session['name'], email=request.session['email'],
+            #                         password=request.session['password'])
             
             reg = Register.objects.filter(email=request.session['email']).exists() 
             if reg != True:
@@ -75,6 +75,15 @@ def confirm(request):
     registers = Register(name=request.session['name'], email=request.session['email'],
                                     password=request.session['password'])
 
-    registers.save()
-    messages.error(request, "Successfull") 
-    return redirect('login')
+    # registers.save()
+    reg = Register.objects.filter(email=request.session['email']).exists() 
+    if reg != True:
+        registers.save()
+        # reg = Register.objects.get(email=request.session['email'])
+        # request.session['id'] = reg.id
+        messages.error(request, "Success")
+        return redirect('login')
+    else:
+        messages.error(request, "Email Already Exists")
+        return render(request, 'login.html')
+    

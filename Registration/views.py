@@ -41,7 +41,7 @@ def login(request):
                 return render(request, 'login.html')
 
     return render(request, 'login.html')
-# @cache_page(60)
+
 def profile(request):
     context = {
         'email' : request.session["email"],

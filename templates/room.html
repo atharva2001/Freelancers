@@ -55,6 +55,14 @@ body {
 <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 </head>
 <body>
+  <div id="winner">
+
+    <!-- <div class="container darker">
+      <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
+      <span class="time-left">20th, April 2021</span>
+    </div> -->
+    
+    </div>
 
 <h2>{{room}} - DjChat</h2>
 
@@ -77,15 +85,25 @@ setInterval(function(){
         success: function(response){
             console.log(response);
             $("#display").empty();
+            $("#winner").empty();
+            var winner_amount = 999999999999999;
+            var winner_name = "NA";
             for (var key in response.messages)
-            {
+            {   
+                if (winner_amount > response.messages[key].value){
+                  winner_amount = response.messages[key].value;
+                  winner_name = response.messages[key].user;
+                }
                 var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
                 $("#display").append(temp);
-            }
+                
+              }
+              $("#winner").append("Current Best Bid : " + winner_amount + " Bidder : " + winner_name);
         },
         error: function(response){
             alert('An error occured')
         }
+        
     });
 },1000);
 })
@@ -94,7 +112,7 @@ setInterval(function(){
 
 <div class="container">
     <style>
-    input[type=text], select {
+    input[type=number], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -130,7 +148,7 @@ setInterval(function(){
         {% csrf_token %}
         <input type="hidden" name="username" id="username" value="{{username}}"/>
         <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
-        <input type="text" name="message" id="message" width="100px" />
+        <input type="number" name="message" id="message" placeholder="Enter Bid Amount" width="100px" />
         <input type="submit" value="Send">
     </form>
 </div>
@@ -152,7 +170,7 @@ setInterval(function(){
         csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
       success: function(data){
-         //alert(data)
+        //alert(message)
       }
     });
     document.getElementById('message').value = ''

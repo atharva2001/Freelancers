@@ -6,6 +6,7 @@ from email.message import EmailMessage
 from Registration import get_mails
 
 def index(request):
+    request.session['loggedin'] = False
     return render(request, 'index.html')
 # @cache_page(60)
 def login(request):
@@ -34,25 +35,30 @@ def login(request):
                 reg = Register.objects.get(email=request.session['email'],password=request.session['password'])
                 request.session['id'] = reg.id
                 request.session['name'] = reg.name
+                request.session['loggedin'] = True
                 return redirect('profile')
             except Exception as e:
-                print(e)
+                # print(e)
                 messages.error(request, "Invalid Credentials")  
                 return render(request, 'login.html')
 
     return render(request, 'login.html')
 
 def profile(request):
-    context = {
-        'email' : request.session["email"],
-        'name' : request.session["name"],
-        'id' : request.session['id'],
-        
-    }
-    return render(request, 'profile.html', context)
+    if request.session['loggedin']: 
+        context = {
+            'email' : request.session["email"],
+            'name' : request.session["name"],
+            'id' : request.session['id'],
+            
+        }
+        return render(request, 'profile.html', context)
+    else:
+        messages.error(request, "Please Login")  
+        return redirect('login')
 
 def emails(request):
-    print(request.session['email'])
+    # print(request.session['email'])
     msg = EmailMessage()
     msg['Subject'] = 'Verification!!'
     msg['From'] = "atharvashirkre77@gmail.com"
@@ -70,7 +76,7 @@ def emails(request):
 
 
 def confirm(request):  
-    print(request.session['email'])
+    # print(request.session['email'])
     registers = Register(name=request.session['name'], email=request.session['email'],
                                     password=request.session['password'])
 

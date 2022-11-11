@@ -464,6 +464,7 @@ md-content.md-wemApp-theme, md-content {
 					<i class="material-icons">arrow_back</i>
 				</md-button>
 				<h2 flex>
+					
 					<span>Visitor profile</span>
 				</h2>
 				<md-button class="md-icon-button" aria-label="Refresh">
@@ -531,7 +532,9 @@ md-content.md-wemApp-theme, md-content {
 
 		<!-- Right section -->
 		<section flex class="wem-main-section">
-
+			<div class="user_panel">
+				<a href="/">logout</a>
+			</div>
 			<!-- Tabs -->
 			<div ng-cloak>
 				<md-content>
@@ -1126,10 +1129,10 @@ $mdThemingProvider.setDefaultTheme('wemApp');
 .controller('ProfileDetails', function($scope, $mdDialog) {
 
 $scope.user = {
-	p1: 'Riley',
-	p2: 'Blue',
-	p3: 'rblue',
-	p4: 'ipsum@lorem.com',
+	p1: '{{name}}',
+	p2: '{{id}}',
+	p3: '',
+	p4: '{{email}}',
 	p6: '',
 	p7: '',
 	p8: '',

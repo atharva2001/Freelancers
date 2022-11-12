@@ -37,7 +37,7 @@ def room(request, room):
     end_month = int(val[1])
     end_day = int(val[2])
 
-    print(val)
+    # print(val)
 
     request.session["hashmap"] = [room, start_hrs, start_min, start_sec, end_hrs, end_min, end_sec]
 

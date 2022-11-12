@@ -64,7 +64,16 @@ body {
     
     </div>
 
-<h2>{{room}} - DjChat</h2>
+    <div id="timeleft">
+
+      <!-- <div class="container darker">
+        <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
+        <span class="time-left">20th, April 2021</span>
+      </div> -->
+      
+      </div>
+
+<h2>{{room}} - DjChat </h2>
 
 <div id="display">
 
@@ -86,8 +95,37 @@ setInterval(function(){
             console.log(response);
             $("#display").empty();
             $("#winner").empty();
-            var winner_amount = 999999999999999;
+            $("#timeleft").empty();
+            var winner_amount = 9999999999;
             var winner_name = "NA";
+            var array = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var countdown = "" + array[{{end_month}}-1] + " " + {{end_day}} + ", " + {{end_year}}+" " + {{end_hrs}} + ":" + {{end_min}} + ":" + {{end_sec}};
+            var countDownDate = new Date(countdown).getTime();
+            
+
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            var dis = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            
+            $("#timeleft").append(dis);
+            
+            var dt = new Date();
+
+            var curr_hrs = dt.getHours();
+            var curr_min = dt.getMinutes();
+            var curr_sec = dt.getSeconds();
+
+            var end_hrs = {{end_hrs}};
+            var end_min = {{end_min}};
+            var end_sec = {{end_sec}};
+
+            var flag = 0;
             for (var key in response.messages)
             {   
                 if (winner_amount > response.messages[key].value){
@@ -96,9 +134,21 @@ setInterval(function(){
                 }
                 var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
                 $("#display").append(temp);
+
+                if (curr_hrs >= end_hrs && curr_min >= end_min && curr_sec >= end_sec){
+                
+                 flag = 1;
+                 alert("Auction has Ended !!");
+                 break; 
+                }
+
                 
               }
-              $("#winner").append("Current Best Bid : " + winner_amount + " Bidder : " + winner_name);
+              $("#winner").append("Current Best Bid : " + response.info[0] + " Bidder : " + response.info[1]);
+              if (flag){
+                window.location = "/login";
+              }
+              
         },
         error: function(response){
             alert('An error occured')

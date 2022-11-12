@@ -70,7 +70,7 @@ def emails(request):
 
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login("atharvashirkre77@gmail.com", "hcceimvbxjxxdjwx")
+        smtp.login("atharvashirkre77@gmail.com", "cfaanmyxnuuatyxu")
         smtp.send_message(msg)
     return render(request, 'email.html')
 

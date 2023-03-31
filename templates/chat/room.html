@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="icon" href="/static/assets/img/favicons/favicon.ico" type="image/icon type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+</style>
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div id="winner">
+
+    <!-- <div class="container darker">
+      <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
+      <span class="time-left">20th, April 2021</span>
+    </div> -->
+    
+    </div>
+
+    <div id="timeleft" style="color : red">
+
+      <!-- <div class="container darker">
+        <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
+        <span class="time-left">20th, April 2021</span>
+      </div> -->
+      
+      </div>
+
+<h2>{{room}} - DjChat </h2>
+
+<div id="display">
+
+<!-- <div class="container darker">
+  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
+  <span class="time-left">20th, April 2021</span>
+</div> -->
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+setInterval(function(){
+    $.ajax({
+        type: 'GET',
+        url : "/chat/getMessages/{{room}}/",
+        success: function(response){
+            console.log(response);
+            $("#display").empty();
+            $("#winner").empty();
+            $("#timeleft").empty();
+            var winner_amount = 9999999999;
+            var winner_name = "NA";
+            var array = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var countdown = "" + array[{{end_month}}-1] + " " + {{end_day}} + ", " + {{end_year}}+" " + {{end_hrs}} + ":" + {{end_min}} + ":" + {{end_sec}};
+            var countDownDate = new Date(countdown).getTime();
+            
+
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            var dis = ""+days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            
+            $("#timeleft").append(dis);
+            
+            var dt = new Date();
+
+            var curr_hrs = dt.getHours();
+            var curr_min = dt.getMinutes();
+            var curr_sec = dt.getSeconds();
+
+            var end_hrs = {{end_hrs}};
+            var end_min = {{end_min}};
+            var end_sec = {{end_sec}};
+
+            var flag = 0;
+            for (var key in response.messages)
+            {   
+                if (winner_amount > response.messages[key].value){
+                  winner_amount = response.messages[key].value;
+                  winner_name = response.messages[key].user;
+                }
+                var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
+                $("#display").append(temp);
+
+                if (curr_hrs >= end_hrs && curr_min >= end_min && curr_sec >= end_sec){
+                 flag = 1;
+                 alert("Auction has Ended !!");
+                 break; 
+                }
+                
+                if (days < 0 && hours < 0 && minutes < 0 && seconds < 0){
+                 flag = 1;
+                 alert("Auction has Ended !!");
+                 break; 
+                }
+
+
+                
+              }
+              $("#winner").append("Current Best Bid : " + response.info[0] + " Bidder : " + response.info[1]);
+              if (flag){
+                window.location = "/login";
+              }
+              
+        },
+        error: function(response){
+            alert('An error occured')
+        }
+        
+    });
+},1000);
+})
+</script>
+
+
+<div class="container">
+    <style>
+    input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+    background-color: #45a049;
+    }
+
+    div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    }
+    </style>
+
+    <form id="post-form">
+        {% csrf_token %}
+        <input type="hidden" name="username" id="username" value="{{username}}"/>
+        <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
+        <input type="number" name="message" id="message" placeholder="Enter Bid Amount" width="100px" />
+        <input type="submit" value="Send">
+    </form>
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+  $(document).on('submit','#post-form',function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type:'POST',
+      url:'/chat/send',
+      data:{
+          username:$('#username').val(),
+          room_id:$('#room_id').val(),
+          message:$('#message').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function(data){
+        //alert(message)
+      }
+    });
+    document.getElementById('message').value = ''
+  });
+</script>
+
+</html>

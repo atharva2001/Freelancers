@@ -96,10 +96,16 @@ def jobs(request):
     "hl": "en",
     "api_key": "a18635695abead5b97d49074060406f08d79b06f447c05f0df2b998540c5b18a"
     }
+    val = 0
     search = GoogleSearch(params)
     results = search.get_dict()
-
-    return render(request, 'user/jobs.html', {'results' : results["jobs_results"]})
+    
+    for k in (results["jobs_results"]):
+        val += 1
+        k.update({'id' : val})
+        
+    request.session['results'] = results["jobs_results"]
+    return render(request, 'user/jobs2.html', {'results' : results["jobs_results"]})
 
 # Specific Jobs Page
 def specific_jobs(request):
@@ -116,7 +122,12 @@ def specific_jobs(request):
 
         search = GoogleSearch(params)
         results = search.get_dict()
+        val = 0
+        for k in (results["jobs_results"]):
+            val += 1
+            k.update({'id' : val})
 
+        request.session['results'] = results["jobs_results"]
         return render(request, 'user/specific_jobs.html', {'results' : results["jobs_results"], "q" : q})
     
 # Hiring page for all types of hirings
@@ -153,3 +164,35 @@ def auction(request):
         messages.success(request, "Auction added")
         return redirect("profile")
     return render(request, 'organization/auction.html')
+
+# Display the History
+def history(request):
+    room = Room.objects.all().filter(owner=request.session['name'])
+    roomMore = RoomMore.objects.all().filter(owner=request.session['name'])
+    data = []
+    length = len(room)
+    for i in range(len(room)):
+        temp = {
+            'name' : "",
+            'owner': "",
+            'winner_name' : "",
+            'winner_amount' : "",
+            'start_date' : "",
+            'end_date' : ""
+        }
+        temp['owner'] = room[i].owner
+        temp['name'] = room[i].name
+        temp['winner_name'] = roomMore[i].winner_name
+        temp['winner_amount'] = roomMore[i].winner_amount
+        temp['start_date'] = roomMore[i].start_date
+        temp['end_date'] = roomMore[i].end_date
+
+        data.append(temp)
+
+    return render(request, 'organization/history.html', {'data' : data, 'length' : str(length)})
+
+
+def more_details(request):
+    if request.method == "POST":
+        result = request.session['results']
+    return render(request, 'user/more_details.html', {'result' : result[int(request.POST.get('value'))-1]})

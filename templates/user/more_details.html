@@ -1,15 +1,15 @@
 {% extends 'user/base.html' %}
-{% block title %}{{ q }}{% endblock title %}
+{% block title %}Apply Now{% endblock title %}
 {% block breadcrumbs %}
+
 <ol class="breadcrumb">
-   <li class="breadcrumb-item active">
-     <a href="../profile">Dashboard</a>
-   </li>
-   <li class="breadcrumb-item active">
-      <a href="../profile/jobs">Jobs</a>
-   </li>
-   <li class="breadcrumb-item active">{{ q }}</li>
- </ol>
+  <li class="breadcrumb-item">
+    <a href="../profile">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item"><a href="../profile/jobs">Jobs</a></li>
+  <li class="breadcrumb-item">Apply Now</li>
+</ol>
+
 {% endblock breadcrumbs %}
 {% block navigation %}
 <a class="navbar-brand" href="index.html">Start Bootstrap</a>
@@ -215,128 +215,5 @@
 </div>
 {% endblock navigation %}
 {% block body %}
-<style>
-  {% comment %} @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"); {% endcomment %}
-  * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  /* Float four columns side by side */
-  .column {
-    float: left;
-    width: 25%;
-    padding: 0 10px;
-  }
-  
-  /* Remove extra left and right margins, due to padding in columns */
-  .row {margin: 0 -5px;}
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Style the counter cards */
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-    padding: 16px;
-    text-align: center;
-    background-color: #f1f1f1;
-  }
-  
-  /* Responsive columns - one column layout (vertical) on small screens */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
-
-
-.job-card {
-  background: #fff;
-  margin-bottom: 25px;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 5px 50px rgba(0, 0, 0, 0.3);
-}
-.job-card__content {
-  padding: 25px;
-}
-.job-card__content-top {
-  display: flex;
-  align-items: center;
-  margin-bottom: 25px;
-}
-.job-card__content-top .job-card_img {
-  margin-right: 25px;
-}
-.job-card__content-top .job-card_img img {
-  height: 50px;
-  width: 50px;
-  object-fit: contain;
-  border-radius: 8px;
-}
-.job-card__content-top .job-card_info {
-  flex: 1;
-}
-.job-card__content-top .job-card_info a {
-  color: #113357;
-}
-.job-card__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 25px;
-  background: #fafafa;
-}
-
-.job-label {
-  display: inline-block;
-  padding: 6px 12px;
-  background: #f1f4f7;
-  border-radius: 5px;
-  margin-right: 2px;
-  margin-top: 15px;
-}
-</style>
-<div class="row">
-
-  {% for res in results  %}
-  <div class="col-sm-4 offset-sm-0.5">
-    <div class="job-card">
-      <div class="job-card__content">
-        <div class="job-card__content-top">
-          <div class="job-card_info">
-            <a href="#!" class="float-right">
-              <i class="fa fa-heart-o"></i>
-            </a>
-            <a href="#!" class="job-card_company">
-              <h4 class="mb-1 d-inline-block">{{ res.id }}. {{ res.company_name }}</h4>
-            </a>
-            <p class="text-muted mb-0">{{ res.location }}</p>
-          </div>
-        </div>
-        <div class="job-card_content-mid">
-          <h4>{{ res.title }}</h4>
-          <p class="mb-0">Source : {{ res.via }}</p>
-        </div>
-      </div>
-      <form method="POST" action="more_details">
-        {% csrf_token %}
-          <div class="job-card__footer">
-            <button class="btn btn-primary" name="value" value={{ res.id }}>Learn More</button>
-          </div>
-      </form>
-    </div>
-  </div>
-  {% endfor %}
-</div>
+   {{ result.title }}
 {% endblock body %}

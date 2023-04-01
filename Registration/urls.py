@@ -26,5 +26,7 @@ urlpatterns = [
     path('profile/hire', views.hire, name='hire'),
     path('profile/hire/auction', views.auction, name='auction'),
     path('profile/jobs', views.jobs, name='jobs'),
+    path('profile/more_details', views.more_details, name='more_details'),
+    path('profile/history', views.history, name='history'),
     path('profile/specific_jobs', views.specific_jobs, name='specific_jobs'),
 ]

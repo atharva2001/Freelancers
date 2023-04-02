@@ -7,9 +7,12 @@ from Registration import get_mails
 from chat.models import Room, RoomMore
 from datetime import time, date
 from serpapi import GoogleSearch
+import openai
 
 # Home Page url
 def index(request):
+   request.session['hashmap'] = {}
+
    return render(request, 'homepage/index.html')
 
 
@@ -197,3 +200,34 @@ def more_details(request):
         result = request.session['results']
         # print(result)
     return render(request, 'user/jobs/job-details.html', {'result' : result[int(request.POST.get('value'))-1]})
+myData = {}
+def ai(request):
+    global myData
+    if request.method == "POST":
+        k = storeData(request)
+        if k != []:
+            request.session['hashmap'][k[0]] = k[1]
+            myData[k[0]] = k[1]
+        print(myData)
+    name = request.session['name']
+    return render(request, 'user/ai.html', {'name':name, 'ans':myData})
+
+def storeData(request):
+    if request.method == "POST":
+        prompt = request.POST.get("question")
+        openai.api_key = "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"
+        response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt = prompt,
+        temperature=0,
+        max_tokens=100,
+        top_p=1,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
+        )
+        val = response["choices"]
+        
+        if prompt not in request.session['hashmap']:
+            return [prompt, val[0]['text']]
+        return []
+

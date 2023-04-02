@@ -24,6 +24,7 @@ urlpatterns = [
     path('confirm', views.confirm, name='confirm'),
     path('profile', views.profile, name='profile'),
     path('profile/hire', views.hire, name='hire'),
+    path('profile/ai', views.ai, name='ai'),
     path('profile/hire/auction', views.auction, name='auction'),
     path('profile/jobs', views.jobs, name='jobs'),
     path('profile/more_details', views.more_details, name='more_details'),

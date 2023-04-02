@@ -342,13 +342,16 @@
 						<div class="job-card__content">
 							<div class="job-card__content-top">
 								<div class="job-card_info">
-									<a href="#!" class="float-right">
-										<i class="fa fa-heart-o"></i>
+                  
+                  {% if res.thumbnail|length != 0 %}
+									  <img src={{ res.thumbnail }} alt="NA" >
+                  {% else %}
+                  <img src="" alt="NA" >
+                  {% endif %}
+									<a class="job-card_company">
+										<h4 class="mb-1 d-inline-block">{{ res.company_name }}</h4>
 									</a>
-									<a href="#!" class="job-card_company">
-										<h4 class="mb-1 d-inline-block">{{ res.id }}. {{ res.company_name }}</h4>
-									</a>
-									<p class="text-muted mb-0">{{ res.location }}</p>
+									<p class="text-muted mb-0">{{ res.location }} {{ res.thumbnail }}</p>
 								</div>
 							</div>
 							<div class="job-card_content-mid">

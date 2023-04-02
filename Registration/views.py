@@ -195,4 +195,5 @@ def history(request):
 def more_details(request):
     if request.method == "POST":
         result = request.session['results']
-    return render(request, 'user/more_details.html', {'result' : result[int(request.POST.get('value'))-1]})
+        # print(result)
+    return render(request, 'user/jobs/job-details.html', {'result' : result[int(request.POST.get('value'))-1]})

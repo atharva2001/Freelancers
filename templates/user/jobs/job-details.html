@@ -1,12 +1,14 @@
 {% extends 'user/base.html' %}
-{% block title %}{{ context.name }}{% endblock title %}
+{% block title %}Apply Now{% endblock title %}
 {% block breadcrumbs %}
 <ol class="breadcrumb">
-  <li>
-    <a class="breadcrumb-item active">Dashboard</a>
-  </li>
-</ol>
-{% endblock breadcrumbs %}
+	<li class="breadcrumb-item">
+	  <a href="../profile">Dashboard</a>
+	</li>
+	<li class="breadcrumb-item"><a href="../profile/jobs">Jobs</a></li>
+	<li class="breadcrumb-item">Apply Now</li>
+ </ol>
+{% endblock breadcrumbs %}	
 {% block navigation %}
 <a class="navbar-brand" href="index.html">Freelancer</a>
 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -17,16 +19,10 @@
 <div class="collapse navbar-collapse" id="navbarResponsive">
   <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
     
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Browse Jobs">
-      <a class="nav-link" href="profile/jobs">
-        <i class="fa fa-fw fa-tasks"></i>
-        <span class="nav-link-text">Browse Jobs</span>
-      </a>
-    </li>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="AI">
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
       <a class="nav-link" href="tables.html">
-        <i class="fa fa-fw fa-android" aria-hidden="true"></i>
-        <span class="nav-link-text">Chat with AI</span>
+        <i class="fa fa-fw fa-table"></i>
+        <span class="nav-link-text">Tables</span>
       </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
@@ -201,11 +197,7 @@
       <form class="form-inline my-2 my-lg-0 mr-lg-2">
         <div class="input-group">
           <input class="form-control" type="text" placeholder="Search for...">
-          <span class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fa fa-search"></i>
-            </button>
-          </span>
+          
         </div>
       </form>
     </li>
@@ -216,56 +208,186 @@
   </ul>
 </div>
 {% endblock navigation %}
+
 {% block body %}
-<div class="card mb-3">
-   <div class="card-header">
-     <i class="fa fa-area-chart"></i> Area Chart Example
-   </div>
-   <div class="card-body">
-     <canvas id="myAreaChart" width="100%" height="30"></canvas>
-   </div>
-   <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
- </div>
- <div class="row">
-   <div class="col-lg-8">
-     <!-- Example Bar Chart Card-->
-     <div class="card mb-3">
-       <div class="card-header">
-         <i class="fa fa-bar-chart"></i> Bar Chart Example
-       </div>
-       <div class="card-body">
-         <div class="row">
-           <div class="col-sm-8 my-auto">
-             <canvas id="myBarChart" width="100" height="50"></canvas>
-           </div>
-           <div class="col-sm-4 text-center my-auto">
-             <div class="h4 mb-0 text-primary">$34,693</div>
-             <div class="small text-muted">YTD Revenue</div>
-             <hr>
-             <div class="h4 mb-0 text-warning">$18,474</div>
-             <div class="small text-muted">YTD Expenses</div>
-             <hr>
-             <div class="h4 mb-0 text-success">$16,219</div>
-             <div class="small text-muted">YTD Margin</div>
-           </div>
-         </div>
-       </div>
-       <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-     </div>
-     <!-- Card Columns Example Social Feed-->
-     
-     <!-- /Card Columns-->
-   </div>
-   <div class="col-lg-4">
-     <!-- Example Pie Chart Card-->
-     <div class=  "card mb-3">
-       <div class="card-header">
-         <i class="fa fa-pie-chart"></i> Pie Chart Example
-       </div>
-       <div class="card-body">
-         <canvas id="myPieChart" width="100%" height="100"></canvas>
-       </div>
-       <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-     </div> 
+
+<head>
+	<link rel="stylesheet" href="../../static/asset/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/asset/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="../static/asset/css/noscript.css" />
+	</noscript>
+</head>
+	<!-- Wrapper -->
+  <body class="preload">
+	<div id="wrapper">
+		
+
+		<!-- Menu -->
+		<!-- <nav id="menu">
+			<ul class="links">
+				<li> <a href="index.html">Home </a> </li>
+
+				<li class="active"> <a href="jobs.html">Jobs</a> </li>
+
+				<li> <a href="blog.html">Blog</a> </li>
+
+				<li> <a href="about-us.html">About Us</a> </li>
+
+				<li><a href="team.html">Team</a></li>
+
+				<li><a href="testimonials.html">Testimonials</a></li>
+
+				<li><a href="terms.html">Terms</a></li>
+
+				<li><a href="contact.html">Contact Us</a></li>
+			</ul>
+		</nav> -->
+
+		<!-- Main -->
+		<div id="main" class="alt">
+			{% comment %} {% for k in result %}
+				{{ k }}
+			{% endfor %} {% endcomment %}
+
+			<!-- One -->
+			<section id="one">
+				<div class="inner">
+					<div class="row">
+						<div class="col-lg-8">
+							<header class="major">
+								<h1>{{ result.title }}</h1>
+
+								<h2>{{ result.company_name }}</h2>
+
+								<h3>Benefits:</h3>
+								<h4>
+									{% for val in result.extensions %}
+										{{ val }},
+									{% endfor %}
+								</h4>
+								
+							</header>
+							<header class="major">
+								<h4><i class="fa fa-map-marker"></i> {{ result.location }}</h4>
+							</header>
+						</div>
+						
+
+						<div class="col-lg-4 text-right">
+
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<section>
+								<div class="contact-method">
+									<span class="icon alt fa-globe"></span>
+									<h3>Website</h3>
+									{% for link in result.related_links %}
+										{% comment %} {{ link }} {% endcomment %}
+										<a href={{link.link}}>{{ link.text }}</a>
+								</br>
+									{% endfor %}
+								</div>
+							</section>
+							{% comment %} <ul class="icons">
+								<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a>
+								</li>
+								<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a>
+								</li>
+								<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a>
+								</li>
+							</ul> {% endcomment %}
+
+							{% comment %} <a href={{}} class="button next scrolly">Apply for this job</a> {% endcomment %}
+						</div>
+					</div>
+
+					<br>
+				</div>
+			</section>
+
+			<section id="contact">
+				<div class="inner">
+					<section>
+						<header class="major">
+							<h2>Description</h2>
+						</header>
+
+						<p>
+							{{ result.description }}
+						</p>
+
+						
+
+					</section>
+
+					<section class="split">
+						<section>
+							<img src={{ result.thumbnail }} class="img-responsive" alt={{ result.company_name }}>
+						</section>
+
+						<section>
+							<div class="contact-method">
+								<span class="icon alt fa-user"></span>
+								<h3>Name</h3>
+								<span>{{ result.company_name }}</span>
+							</div>
+						</section>
+
+						
+					</section>
+				</div>
+			</section>
+		</div>
+
+		<!-- Footer -->
+		<!-- <footer id="footer">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+				</ul>
+				 <ul class="copyright">
+					<li>Copyright © 2020 Company Name - Template by:</li>
+					<li> <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+				</ul>
+			</div>
+		</footer> -->
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="../static/asset/js/jquery.min.js"></script>
+	<script src="../static/asset/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../static/asset/js/jquery.scrolly.min.js"></script>
+	<script src="../static/asset/js/jquery.scrollex.min.js"></script>
+	<script src="../static/asset/js/browser.min.js"></script>
+	<script src="../static/asset/js/breakpoints.min.js"></script>
+	<script src="../static/asset/js/util.js"></script>
+	<script src="../static/asset/js/main.js"></script>
+
+
+
+
+
+
+</body>
 
 {% endblock body %}
+
+
+
+
+
+
+
+
+
+

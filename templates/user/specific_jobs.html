@@ -315,9 +315,12 @@
       <div class="job-card__content">
         <div class="job-card__content-top">
           <div class="job-card_info">
-            <a href="#!" class="float-right">
-              <i class="fa fa-heart-o"></i>
-            </a>
+            {% if res.thumbnail|length != 0 %}
+									  <img src={{ res.thumbnail }} alt="NA" >
+                  {% else %}
+                  <img src="" alt="NA" >
+                  {% endif %}
+           
             <a href="#!" class="job-card_company">
               <h4 class="mb-1 d-inline-block">{{ res.id }}. {{ res.company_name }}</h4>
             </a>

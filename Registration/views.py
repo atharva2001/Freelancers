@@ -8,6 +8,7 @@ from chat.models import Room, RoomMore
 from datetime import time, date
 from serpapi import GoogleSearch
 import openai
+import os
 
 # Home Page url
 def index(request):
@@ -215,7 +216,7 @@ def ai(request):
 def storeData(request):
     if request.method == "POST":
         prompt = request.POST.get("question")
-        openai.api_key = "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"
+        openai.api_key = os.environ["OPENAI_API_KEY"]
         response = openai.Completion.create(
         model="text-davinci-003",
         prompt = prompt,

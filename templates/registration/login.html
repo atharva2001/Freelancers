@@ -43,8 +43,10 @@
  * For details, see https://creativecommons.org/licenses/by/3.0/.
  */
 .bd-navbar {
-    min-height: 4rem;
+    height:80px;
+    {% comment %} min-height: 4rem; {% endcomment %}
     background-color: #6f42c1;
+   
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0 rgba(0, 0, 0, .1)
 }
 
@@ -88,12 +90,12 @@
 
 .bd-navbar .navbar-nav .nav-link.active,
 .bd-navbar .navbar-nav .nav-link:hover {
-    color: pink;
-    background-color: transparent
+    color:white;
+    background-color:transparent;
 }
 
 .bd-navbar .navbar-nav .nav-link.active {
-    font-weight: 600
+    font-weight:600;
 }
 
 .bd-navbar .navbar-nav-svg {
@@ -1857,7 +1859,7 @@ span {
 
 a {
 	color: #333;
-	font-size: 14px;
+	font-size: 20px;
 	text-decoration: none;
 	margin: 15px 0;
 }
@@ -2068,6 +2070,10 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+
+.pass{
+    font-size:15px;
+}
 </style>
 
 
@@ -2170,7 +2176,7 @@ footer a {
 			<h1>Sign in</h1>
 			<input type="email" name="email" placeholder="Email" />
 			<input type="password" name="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
+			<a href="#" class="pass">Forgot your password?</a>
 			<input type="submit" name="submit" value="Sign In"></input>
 		</form>
 	</div> 
@@ -2207,7 +2213,17 @@ signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
   </script>
-  
+  <script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/6424098f31ebfa0fe7f54f4b/1gsmcaml2';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+	</script>   
 
 </body>
 </html>

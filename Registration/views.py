@@ -8,7 +8,6 @@ from chat.models import Room, RoomMore
 from datetime import time, date
 from serpapi import GoogleSearch
 import openai
-import os
 
 # Home Page url
 def index(request):
@@ -57,9 +56,9 @@ def emails(request):
     msg['To'] = request.session['email']
     msg.set_content(get_mails.get(), subtype='html')
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login("freelancing.team.77@gmail.com", "jintvfegctwnobok")
+        smtp.login("freelancing.team.123@gmail.com", "erlzkdosihpstyuk")
         smtp.send_message(msg)
-    return render(request, 'email.html')
+    return render(request, 'registration/email.html')
 
 # Registring after confirmation of mail
 def confirm(request):  

@@ -208,14 +208,14 @@ def ai(request):
         if k != []:
             request.session['hashmap'][k[0]] = k[1]
             myData[k[0]] = k[1]
-        print(myData)
+        # print(myData)
     name = request.session['name']
     return render(request, 'user/ai.html', {'name':name, 'ans':myData})
 
 def storeData(request):
     if request.method == "POST":
         prompt = request.POST.get("question")
-        openai.api_key = "YOUR API KEY HERE"
+        openai.api_key = "YOUR KEY HERE"
         response = openai.Completion.create(
         model="text-davinci-003",
         prompt = prompt,

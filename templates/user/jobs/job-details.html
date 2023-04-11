@@ -1,13 +1,16 @@
 {% extends 'user/base.html' %}
 {% block title %}Apply Now{% endblock title %}
+
 {% block breadcrumbs %}
 <ol class="breadcrumb">
-	<li class="breadcrumb-item">
-	  <a href="../profile">Dashboard</a>
-	</li>
-	<li class="breadcrumb-item"><a href="../profile/jobs">Jobs</a></li>
-	<li class="breadcrumb-item">Apply Now</li>
- </ol>
+  <li class="breadcrumb-item">
+    <a href="../profile">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="jobs">Jobs</a>
+  </li>
+  <li class="breadcrumb-item active">Apply</li>
+</ol>
 {% endblock breadcrumbs %}	
 {% block navigation %}
 <a class="navbar-brand" href="index.html">Freelancer</a>
@@ -19,10 +22,15 @@
 <div class="collapse navbar-collapse" id="navbarResponsive">
   <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
     
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-      <a class="nav-link" href="tables.html">
-        <i class="fa fa-fw fa-table"></i>
-        <span class="nav-link-text">Tables</span>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="AI">
+      <a class="nav-link" href="ai">
+        <lord-icon
+    src="https://cdn.lordicon.com/bhfjfgqz.json"
+    trigger="hover"
+    style="height:25px; width:25px;"
+    axis-y="65">
+</lord-icon>
+<span class="nav-link-text">Chat with AI</span>
       </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
@@ -197,7 +205,11 @@
       <form class="form-inline my-2 my-lg-0 mr-lg-2">
         <div class="input-group">
           <input class="form-control" type="text" placeholder="Search for...">
-          
+          <span class="input-group-append">
+            <button class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
         </div>
       </form>
     </li>
@@ -211,14 +223,6 @@
 
 {% block body %}
 
-<head>
-	<link rel="stylesheet" href="../../static/asset/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../static/asset/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="../static/asset/css/noscript.css" />
-	</noscript>
-</head>
 	<!-- Wrapper -->
   <body class="preload">
 	<div id="wrapper">
@@ -259,7 +263,7 @@
 							<header class="major">
 								<h1>{{ result.title }}</h1>
 
-								<h2>{{ result.company_name }}</h2>
+								<h2 styele="margin-left:20%;">{{ result.company_name }}</h2>
 
 								<h3>Benefits:</h3>
 								<h4>
@@ -284,7 +288,7 @@
 							<br>
 							<section>
 								<div class="contact-method">
-									<span class="icon alt fa-globe"></span>
+									<i class="fa fa-globe" aria-hidden="true"></i>
 									<h3>Website</h3>
 									{% for link in result.related_links %}
 										{% comment %} {{ link }} {% endcomment %}
@@ -328,12 +332,13 @@
 
 					<section class="split">
 						<section>
-							<img src={{ result.thumbnail }} class="img-responsive" alt={{ result.company_name }}>
+							<img src={{ result.thumbnail }} class="img-responsive" alt="" />
 						</section>
 
 						<section>
 							<div class="contact-method">
-								<span class="icon alt fa-user"></span>
+								<i class="fa fa-user" aria-hidden="true"></i>
+
 								<h3>Name</h3>
 								<span>{{ result.company_name }}</span>
 							</div>

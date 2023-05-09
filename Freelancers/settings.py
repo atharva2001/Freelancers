@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import mimetypes
+# mimetypes.add_type("text/javascript", ".js", True)
+# mimetypes.add_type("text/html", ".js", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +33,8 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
+# WHITENOISE_MIMETYPES = {'.js': 'text/javascript'}
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,9 +46,12 @@ INSTALLED_APPS = [
     'chat',
     'Registration',
     'Forums',
+    'ckeditor',
+    
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -122,6 +130,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+STATIC_ROOT = BASE_DIR/"staticfiles"
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]

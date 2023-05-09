@@ -16,7 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Forums import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
    path('', views.index, name='index'),
-]
+   path('add', views.add, name='add'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     from django.conf.urls.static import static
+#     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+#     # serve static and media files from development server
+#     urlpatterns += staticfiles_urlpatterns()
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

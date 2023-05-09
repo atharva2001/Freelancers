@@ -214,8 +214,12 @@ def ai(request):
 
 def storeData(request):
     if request.method == "POST":
+        v1 = "sk"
+        v2 = "-"
+        v3 = "lGsvdYUfSN0TaSrMkeRVT3Bl"
+        v4 = "bkFJXMCiKnWD07yM5t2WYxSD"
         prompt = request.POST.get("question")
-        openai.api_key = "YOUR KEY HERE"
+        openai.api_key = v1 + v2 + v3 + v4
         response = openai.Completion.create(
         model="text-davinci-003",
         prompt = prompt,

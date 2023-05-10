@@ -13,6 +13,7 @@ class tags(models.Model):
    
 class forum(models.Model):
    id = models.IntegerField(primary_key = True)
+   email = models.CharField(max_length=100, blank=True)
    title = models.CharField(max_length=1000)
    tags = models.CharField(max_length=1000)
    author_name = models.CharField(max_length=100)

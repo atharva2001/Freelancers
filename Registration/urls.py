@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Registration import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -30,4 +33,4 @@ urlpatterns = [
     path('profile/more_details', views.more_details, name='more_details'),
     path('profile/history', views.history, name='history'),
     path('profile/specific_jobs', views.specific_jobs, name='specific_jobs'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

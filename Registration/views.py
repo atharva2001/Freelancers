@@ -5,9 +5,12 @@ import smtplib
 from email.message import EmailMessage
 from Registration import get_mails
 from chat.models import Room, RoomMore
+from Forums.models import forum, replies, tags
 from datetime import time, date
 from serpapi import GoogleSearch
 import openai
+import requests
+from newsapi import NewsApiClient
 
 # Home Page url
 def index(request):
@@ -77,16 +80,82 @@ def confirm(request):
 # Profile landing page
 def profile(request):
     if request.session['loggedin']: 
+        news = []
+        
+        x = requests.get('https://newsapi.org/v2/top-headlines?country=in&apiKey=9917fcab855a4504a29874246181c8c2')
+        temp = []
+        br = 0
+        for i in x.json()['articles']:
+            if br == 4:
+                break
+            br += 1
+            temp = [(i['source']['name'], i['author'], i['title'], i['url'])]
+            
+            news.append(temp)
+        # print(news)
+
+
+        forums = forum.objects.filter(email=request.session['email'])
+        tag = tags.objects.all()
+        reply = replies.objects.filter(forum_id=forums[0].id)
+        hashmap = {}
+        tagging = {}
+        temp1 = forums[0].tags.split(',')
+        temp2 = [int(i) for i in temp1]
+        tagg = []
+
+        for i in tag:
+            if int(i.id) in temp2:
+                tagg.append(i.name)
+        data = []
+
+        # print(forums[0].author_name)
+        for i in range(len(forums)):
+            print(forums[i].date)
+            temp = [forums[i].id, forums[i].author_name, 
+                    forums[i].title, "media/" + str(forums[i].image),
+                    forums[i].description, forums[i].date] + tagg
+            data.append(temp)
+  
+                
+                
+        params = {
+            "engine": "google_jobs",
+            "q": "Developer",
+            "hl": "en",
+            "api_key": "a18635695abead5b97d49074060406f08d79b06f447c05f0df2b998540c5b18a"
+            }
+        val = 0
+        search = GoogleSearch(params)
+        results = search.get_dict()
+
+        idx = 0
+        for k in (results["jobs_results"]):
+            idx += 1
+            k.update({'id' : idx})
+
+        job = []
+        for i in results["jobs_results"]:
+            if val == 4:
+                break 
+            val += 1
+            job.append(i)
+
+        # for i in job:
+        #     print(i['company_name'], i['id'])
+        
         context = {
             'email' : request.session["email"],
             'name' : request.session["name"],
             'id' : request.session['id'],
         }
         # print(request.session['role']) 
+        # print(data)
+        request.session['results'] = results["jobs_results"]
         if request.session['role'] == "org":   
-            return render(request, 'organization/index.html', {'context' : context})
+            return render(request, 'organization/index.html', {'context' : context, 'data' : data, 'news' : news})
         else:
-            return render(request, 'user/index.html', {'context' : context})
+            return render(request, 'user/index.html', {'context' : context, 'data' : data, 'job' : job, 'news' : news})
     else:
         messages.error(request, "Please Login")  
         return redirect('login')
@@ -156,7 +225,7 @@ def auction(request):
         mm_end = request.POST.get("mm_end")
         ss_end = request.POST.get("ss_end")
         
-        room = Room(name=name, owner=request.session['name']    )
+        room = Room(name=name, owner=request.session['name'])
         room.save()
         ts = time(int(hr_start), int(mm_start), int(ss_start))
         te = time(int(hr_end), int(mm_end), int(ss_end))
@@ -200,6 +269,7 @@ def more_details(request):
         result = request.session['results']
         # print(result)
     return render(request, 'user/jobs/job-details.html', {'result' : result[int(request.POST.get('value'))-1]})
+
 myData = {}
 def ai(request):
     global myData

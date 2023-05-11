@@ -94,28 +94,29 @@ def profile(request):
             news.append(temp)
         # print(news)
 
-
+        data = []
         forums = forum.objects.filter(email=request.session['email'])
         tag = tags.objects.all()
-        reply = replies.objects.filter(forum_id=forums[0].id)
-        hashmap = {}
-        tagging = {}
-        temp1 = forums[0].tags.split(',')
-        temp2 = [int(i) for i in temp1]
-        tagg = []
+        if len(forums):
+            reply = replies.objects.filter(forum_id=forums[0].id)
+            hashmap = {}
+            tagging = {}
+            temp1 = forums[0].tags.split(',')
+            temp2 = [int(i) for i in temp1]
+            tagg = []
 
-        for i in tag:
-            if int(i.id) in temp2:
-                tagg.append(i.name)
-        data = []
+            for i in tag:
+                if int(i.id) in temp2:
+                    tagg.append(i.name)
+            data = []
 
-        # print(forums[0].author_name)
-        for i in range(len(forums)):
-            print(forums[i].date)
-            temp = [forums[i].id, forums[i].author_name, 
-                    forums[i].title, "media/" + str(forums[i].image),
-                    forums[i].description, forums[i].date] + tagg
-            data.append(temp)
+            # print(forums[0].author_name)
+            for i in range(len(forums)):
+                print(forums[i].date)
+                temp = [forums[i].id, forums[i].author_name, 
+                        forums[i].title, "media/" + str(forums[i].image),
+                        forums[i].description, forums[i].date] + tagg
+                data.append(temp)
   
                 
                 

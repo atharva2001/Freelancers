@@ -4,26 +4,28 @@
 	<!--------------------------------------
 HEADER
 --------------------------------------->
-{% comment %} {{ content.2.0.link }} {% endcomment %}
+{% comment %} <img src="{{ content.1.link }}" /> {% endcomment %}
+
 <div class="container">
+	{% comment %} {{ content.1.name }} {% endcomment %}
 	<div class="jumbotron jumbotron-fluid mb-3 pt-0 pb-0 bg-lightblue position-relative">
 		<div class="pl-4 pr-0 h-100 tofront">
 			<div class="row justify-content-between">
 				<div class="col-md-6 pt-6 pb-6 align-self-center">
-					<h1 class="secondfont mb-3 font-weight-bold">{{ content.1.0.title }}</h1>
+					<h1 class="secondfont mb-3 font-weight-bold">{{ content.1.title }}</h1>
 					<p class="mb-3">
-						{{ content.1.0.desc }}
+						{{ content.1.desc|safe }}
 					</p>
 					<a href="./article.html" class="btn btn-dark">Read More</a>
 					<br>
-					<small class="d-block"><a class="text-muted" href="./author.html">{{ content.1.0.name }}</a></small>
+					<small class="d-block"><a class="text-muted" href="./author.html">{{ content.1.name }}</a></small>
 
-					<small class="text-muted">{{ content.1.0.date }}</small>
+					<small class="text-muted">{{ content.1.date }}</small>
 
 				</div>
 			
-				{% comment %} <div class="col-md-6 d-none d-md-block pr-0" style="background-size: 300px 300px; background-image:url({{ content.2.0.link }});>	</div> {% endcomment %}
-				<img src={{ content.1.0.link }} style="height:300px; width:250px;"/>
+				{% comment %} <div class="col-md-6 d-none d-md-block pr-0" style="background-size: 300px 300px; background-image:url({{ content.2.link }});>	</div> {% endcomment %}
+				<img src={{ content.1.link }} style="height:300px; width:250px;"/>
 				
 			</div>	
 		</div>
@@ -41,17 +43,17 @@ MAIN
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card border-0 mb-4 box-shadow h-xl-300">              
-                <div style="background-image: url({{ content.2.0.link }}); height: 200px;    background-size: auto;    background-repeat: no-repeat;"></div>               
+                <div style="background-image: url({{ content.2.link }}); height: 200px;    background-size: auto;    background-repeat: no-repeat;"></div>               
 				<div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
 					<h2 class="h4 font-weight-bold">
-					<a class="text-dark" href="./article.html">{{ content.2.0.title }}</a>
+					<a class="text-dark" href="./article.html">{{ content.2.title }}</a>
 					</h2>
 					<p class="card-text">
-						{{ content.2.0.desc }}
+						{{ content.2.desc|safe }}
 					</p>
 					<div>
-						<small class="d-block"><a class="text-muted" href="./author.html">{{ content.2.0.name }}</a></small>
-						<small class="text-muted">{{ content.2.0.date }}</small>
+						<small class="d-block"><a class="text-muted" href="./author.html">{{ content.2.name }}</a></small>
+						<small class="text-muted">{{ content.2.date }}</small>
 					</div>
 				</div>
 			</div>

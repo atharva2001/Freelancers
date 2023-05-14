@@ -1,20 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-   <link rel="stylesheet" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">    
-   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
-   <script>hljs.initHighlightingOnLoad();</script>
-</head>
-<body>
-   <form method="POST">
-      {% csrf_token %}
-      {{ media }}
-      {% comment %} {{ form.as_p|safe }} {% endcomment %}
-      {% comment %} <textarea id="myTextarea"></textarea> {% endcomment %}
-   </form>
-</body>
-</html>
+{% extends 'forums/base.html' %}
+{% block title %}Forums{% endblock title %}
+{% block body %}
+
+   <div class="container">
+      <h1>
+         Add a New Forum !
+      </h1>
+      <center>
+         <form method="POST" action="./" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form" style="border:outset;">
+            <hr>
+            <label>Title : <input type="text" name="title"></input></label>
+            <hr>
+            <label>Tags : <input type="text" name="tags" placeholder="Ex: python,java,IT,buisness,etc."></input></label>
+            <hr>
+            <label>Description : <textarea name="description"></textarea></label>
+            <hr>
+            <label>Author Name : <input type="text" name="author_name" placeholder="You can be Anonymous"></input></label>
+            <hr>
+            <label>Email : <input type="email" name="email"></input></label>
+            <hr>
+            <label>Add an Image : <input type="file" name="image"></input></label>
+            <hr>
+            <label>Time is : <span id="time"></label>
+         </div>
+         <br>
+         <button type="submit" name="submit">Submit</button>
+      </form>
+      </center>
+   </div>
+   <script>
+      var datetime = new Date();
+      document.getElementById("time").textContent = datetime;
+   </script>
+{% endblock body %}

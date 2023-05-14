@@ -4,7 +4,6 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class tags(models.Model):
-   id = models.IntegerField(primary_key = True)
    name = models.CharField(max_length=100)
    content = models.CharField(max_length=1000)
    
@@ -12,13 +11,12 @@ class tags(models.Model):
       return self.name
    
 class forum(models.Model):
-   id = models.IntegerField(primary_key = True)
    email = models.CharField(max_length=100, blank=True)
    title = models.CharField(max_length=1000)
    tags = models.CharField(max_length=1000)
    author_name = models.CharField(max_length=100)
    description = RichTextField(blank=True, null=True)
-   date = models.DateTimeField(default=datetime.now, blank=True)
+   date = models.DateTimeField(default=datetime.now, blank=True, null=True )
    image = models.ImageField( 
                upload_to='media/',
                null=True,
@@ -29,7 +27,6 @@ class forum(models.Model):
       return str(self.id)
    
 class replies(models.Model):
-   id = models.IntegerField(primary_key = True)
    forum_id = models.IntegerField()
    author_name = models.CharField(max_length=100)
    answer = RichTextField(blank=True, null=True)

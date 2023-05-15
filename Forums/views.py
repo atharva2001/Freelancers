@@ -8,6 +8,7 @@ def index(request):
    content = {}
    db_forum = forum.objects.all()
    db_tag = tags.objects.all()
+   
 
    if request.method == "POST":
 
@@ -17,6 +18,8 @@ def index(request):
          answer = request.POST.get("answer")
          author_name = request.POST.get("author_name")
          email = request.POST.get("email")
+         if request.session['email'] != "":
+            email = request.session['email']
          image = request.FILES.get("image")
          rep = replies(forum_id=request.session['id'], author_name=author_name,
                        answer=answer,image=image)
@@ -28,6 +31,8 @@ def index(request):
          desc = request.POST.get("description")
          author_name = request.POST.get("author_name")
          email = request.POST.get("email")
+         if request.session['email'] != "":
+            email = request.session['email']
          image = request.FILES.get("image")
 
          # temp_i = str(image).replace(" ", "_")
@@ -52,14 +57,6 @@ def index(request):
          temp_f = forum(email=email, title=title, tags=tag, author_name=author_name, 
                         description=desc, date=datetime.now(), image=image)
          temp_f.save()
-
-      
-
-
-
-
-      
-
    
    for i in db_forum:
       content[i.id] = {

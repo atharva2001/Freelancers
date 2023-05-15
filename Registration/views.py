@@ -95,19 +95,22 @@ def profile(request):
         # print(news)
 
         data = []
+        # print("here")
         forums = forum.objects.filter(email=request.session['email'])
         tag = tags.objects.all()
+        # print(len(forums))
         if len(forums):
+            print(forums[0])
             reply = replies.objects.filter(forum_id=forums[0].id)
-            hashmap = {}
-            tagging = {}
-            temp1 = forums[0].tags.split(',')
-            temp2 = [int(i) for i in temp1]
-            tagg = []
+            # hashmap = {}
+            # tagging = {}
+            # temp1 = forums[0].tags.split(',')
+            # temp2 = [int(i) for i in temp1]
+            # tagg = []
 
-            for i in tag:
-                if int(i.id) in temp2:
-                    tagg.append(i.name)
+            # for i in tag:
+            #     if int(i.id) in temp2:
+            #         tagg.append(i.name)
             data = []
 
             # print(forums[0].author_name)
@@ -115,7 +118,7 @@ def profile(request):
                 print(forums[i].date)
                 temp = [forums[i].id, forums[i].author_name, 
                         forums[i].title, "media/" + str(forums[i].image),
-                        forums[i].description, forums[i].date] + tagg
+                        forums[i].description, forums[i].date, forums[i].tags]
                 data.append(temp)
   
                 

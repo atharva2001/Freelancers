@@ -16,7 +16,10 @@ HEADER
 					<p class="mb-3">
 						{{ content.1.desc|safe }}
 					</p>
-					<a href="./article.html" class="btn btn-dark">Read More</a>
+					<form method="POST" action="./read">
+						{% csrf_token %}
+					<button class="btn btn-dark" value={{ content.1.id }} name="id">Read More</button>
+					</form>
 					<br>
 					<small class="d-block"><a class="text-muted" href="./author.html">{{ content.1.name }}</a></small>
 
@@ -46,7 +49,10 @@ MAIN
                 <div style="background-image: url({{ content.2.link }}); height: 200px;    background-size: auto;    background-repeat: no-repeat;"></div>               
 				<div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
 					<h2 class="h4 font-weight-bold">
-					<a class="text-dark" href="./article.html">{{ content.2.title }}</a>
+					<form method="POST" action="./read">
+						{% csrf_token %}
+					<button class="btn btn-dark" value={{ content.2.id }} name="id">Read More</button>
+					</form>
 					</h2>
 					<p class="card-text">
 						{{ content.2.desc|safe }}
@@ -61,39 +67,48 @@ MAIN
 		<div class="col-lg-6">
 			<div class="flex-md-row mb-4 box-shadow h-xl-300">
 				<div class="mb-3 d-flex align-items-center">
-					<img height="80" src="/static/assets2/img/demo/blog4.jpg">
+					<img height="80" src={{ content.3.link }}>
 					<div class="pl-3">
 						<h2 class="mb-2 h6 font-weight-bold">
-						<a class="text-dark" href="./article.html">Nasa's IceSat space laser makes height maps of Earth</a>
-						</h2>
+							<form method="POST" action="./read">
+								{% csrf_token %}
+									<button class="btn btn-dark" value={{ content.3.id }} name="id">Read More</button>
+							</form>
+					</h2>
 						<div class="card-text text-muted small">
-							 Jake Bittle in LOVE/HATE
+							{{ content.3.desc }}
 						</div>
-						<small class="text-muted">Dec 12 &middot; 5 min read</small>
+						<small class="text-muted">{{ content.3.date }}</small>
 					</div>
 				</div>
 				<div class="mb-3 d-flex align-items-center">
-					<img height="80" src="/static/assets2/img/demo/blog5.jpg">
+					<img height="80" src={{ content.4.link }}>
 					<div class="pl-3">
 						<h2 class="mb-2 h6 font-weight-bold">
-						<a class="text-dark" href="./article.html">Underwater museum brings hope to Lake Titicaca</a>
-						</h2>
+							<form method="POST" action="./read">
+								{% csrf_token %}
+									<button class="btn btn-dark" value={{ content.4.id }} name="id">Read More</button>
+							</form>
+					</h2>
 						<div class="card-text text-muted small">
-							 Jake Bittle in LOVE/HATE
+							{{ content.4.desc }}
 						</div>
-						<small class="text-muted">Dec 12 &middot; 5 min read</small>
+						<small class="text-muted">{{ content.4.date }}</small>
 					</div>
 				</div>
 				<div class="mb-3 d-flex align-items-center">
-					<img height="80" src="/static/assets2/img/demo/blog6.jpg">
+					<img height="80" src={{ content.5.link }}>
 					<div class="pl-3">
 						<h2 class="mb-2 h6 font-weight-bold">
-						<a class="text-dark" href="./article.html">Sun-skimming probe starts calling home</a>
-						</h2>
+							<form method="POST" action="./read">
+								{% csrf_token %}
+									<button class="btn btn-dark" value={{ content.5.id }} name="id">Read More</button>
+							</form>
+					</h2>
 						<div class="card-text text-muted small">
-							 Jake Bittle in LOVE/HATE
+							{{ content.5.desc }}
 						</div>
-						<small class="text-muted">Dec 12 &middot; 5 min read</small>
+						<small class="text-muted">{{ content.5.date }}</small>
 					</div>
 				</div>
 			</div>
@@ -108,47 +123,59 @@ MAIN
 			<div class="mb-3 d-flex justify-content-between">
 				<div class="pr-3">
 					<h2 class="mb-1 h4 font-weight-bold">
-					<a class="text-dark" href="./article.html">Nearly 200 Great Barrier Reef coral species also live in the deep sea</a>
+						{{ content.6.title }}
 					</h2>
 					<p>
-						There are more coral species lurking in the deep ocean that previously thought.
+						{{ content.6.desc }}
 					</p>
 					<div class="card-text text-muted small">
-						 Jake Bittle in SCIENCE
+						{{ content.6.name }}
 					</div>
-					<small class="text-muted">Dec 12 &middot; 5 min read</small>
+					<form method="POST" action="./read">
+						{% csrf_token %}
+							<button class="btn btn-dark" value={{ content.6.id }} name="id">Read More</button>
+						</form>
+					{% comment %} <small class="text-muted">Dec 12 &middot; 5 min read</small> {% endcomment %}
 				</div>
-				<img height="120" src="/static/assets2/img/demo/blog8.jpg">
+				<img height="120" src={{ content.6.link }}>
 			</div>
 			<div class="mb-3 d-flex justify-content-between">
 				<div class="pr-3">
 					<h2 class="mb-1 h4 font-weight-bold">
-					<a class="text-dark" href="./article.html">East Antarctica's glaciers are stirring</a>
+						{{ content.7.title }}
 					</h2>
 					<p>
-						Nasa says it has detected the first signs of significant melting in a swathe of glaciers in East Antarctica.
+						{{ content.7.desc }}
 					</p>
 					<div class="card-text text-muted small">
-						 Jake Bittle in SCIENCE
+						{{ content.7.name }}
 					</div>
-					<small class="text-muted">Dec 12 &middot; 5 min read</small>
+					<form method="POST" action="./read">
+						{% csrf_token %}
+							<button class="btn btn-dark" value={{ content.7.id }} name="id">Read More</button>
+						</form>
+					{% comment %} <small class="text-muted">Dec 12 &middot; 5 min read</small> {% endcomment %}
 				</div>
-				<img height="120" src="/static/assets2/img/demo/1.jpg">
+				<img height="120" src={{ content.7.link }}>
 			</div>
 			<div class="mb-3 d-flex justify-content-between">
 				<div class="pr-3">
 					<h2 class="mb-1 h4 font-weight-bold">
-					<a class="text-dark" href="./article.html">50 years ago, armadillos hinted that DNA wasn’t destiny</a>
+						{{ content.8.title }}
 					</h2>
 					<p>
-						Nasa says it has detected the first signs of significant melting in a swathe of glaciers in East Antarctica.
+						{{ content.8.desc }}
 					</p>
 					<div class="card-text text-muted small">
-						 Jake Bittle in SCIENCE
+						{{ content.8.name }}
 					</div>
-					<small class="text-muted">Dec 12 &middot; 5 min read</small>
+					<form method="POST" action="./read">
+						{% csrf_token %}
+							<button class="btn btn-dark" value={{ content.8.id }} name="id">Read More</button>
+						</form>
+					{% comment %} <small class="text-muted">Dec 12 &middot; 5 min read</small> {% endcomment %}
 				</div>
-				<img height="120" src="/static/assets2/img/demo/5.jpg">
+				<img height="120" src={{ content.8.link }}>
 			</div>
 		</div>
 		<div class="col-md-4 pl-4">
@@ -157,41 +184,45 @@ MAIN
 				<li>
 				<span>
 				<h6 class="font-weight-bold">
-				<a href="./article.html" class="text-dark">Did Supernovae Kill Off Large Ocean Animals?</a>
+				{{ content.9.title }}
 				</h6>
-				<p class="text-muted">
-					Jake Bittle in SCIENCE
-				</p>
+				<form method="POST" action="./read">
+					{% csrf_token %}
+					<button class="btn btn-dark" value={{ content.9.id }} name="id">Read More</button>
+				</form>
 				</span>
 				</li>
 				<li>
 				<span>
 				<h6 class="font-weight-bold">
-				<a href="./article.html" class="text-dark">Humans Reversing Climate Clock: 50 Million Years</a>
+				{{ content.10.title }}
 				</h6>
-				<p class="text-muted">
-					Jake Bittle in SCIENCE
-				</p>
+				<form method="POST" action="./read">
+					{% csrf_token %}
+					<button class="btn btn-dark" value={{ content.10.id }} name="id">Read More</button>
+				</form>
 				</span>
 				</li>
 				<li>
 				<span>
 				<h6 class="font-weight-bold">
-				<a href="./article.html" class="text-dark">Unprecedented Views of the Birth of Planets</a>
+				{{ content.11.title }}
 				</h6>
-				<p class="text-muted">
-					Jake Bittle in SCIENCE
-				</p>
+				<form method="POST" action="./read">
+					{% csrf_token %}
+					<button class="btn btn-dark" value={{ content.11.id }} name="id">Read More</button>
+				</form>
 				</span>
 				</li>
 				<li>
 				<span>
 				<h6 class="font-weight-bold">
-				<a href="./article.html" class="text-dark">Effective New Target for Mood-Boosting Brain Stimulation Found</a>
+				{{ content.12.title }}
 				</h6>
-				<p class="text-muted">
-					Jake Bittle in SCIENCE
-				</p>
+				<form method="POST" action="./read">
+					{% csrf_token %}
+					<button class="btn btn-dark" value={{ content.12.id }} name="id">Read More</button>
+				</form>
 				</span>
 				</li>
 			</ol>

@@ -1,0 +1,88 @@
+{% extends 'forums/base.html' %}
+{% block title %}Read{% endblock title %}
+{% block body %}
+<div class="container">
+	<div class="jumbotron jumbotron-fluid mb-3 pt-0 pb-0 bg-lightblue position-relative">
+      <div class="row justify-content-between">
+         <div class="col-md-6 pt-6 pb-6 align-self-center">
+            <h1 class="secondfont mb-3 font-weight-bold">{{ content.title }}</h1>
+            <p class="mb-3">
+               {{ content.desc|safe }}
+               
+            </p>
+            <br>
+            <small class="d-block"><a class="text-muted" href="./author.html">{{ content.name }}</a></small>
+
+            <small class="text-muted">{{ content.date }}</small>
+
+         </div>
+      
+         {% comment %} <div class="col-md-6 d-none d-md-block pr-0" style="background-size: 300px 300px; background-image:url({{ content.2.link }});>	</div> {% endcomment %}
+         <img src={{ content.link }} style="height:300px; width:250px;" alt=""/>
+         
+      </div>	
+   </div>
+   {% comment %} {{ reply }} {% endcomment %}
+   Answers
+   {% if reply|length == 0 %}
+      <center>
+         NO REPLIES YET !
+      </center>
+   {% else %}
+   {% for reply in reply %}
+   <div class="jumbotron jumbotron-fluid mb-3 pt-0 pb-0 bg-grey position-relative">
+      <div class="row justify-content-between">
+         <div class="col-md-6 pt-6 pb-6 align-self-center">
+            <h1 class="secondfont mb-3 font-weight-bold">{{ reply.title }}</h1>
+            <p class="mb-3">
+               {{ reply.answer|safe }}
+               
+            </p>
+            <br>
+            <small class="d-block"><a class="text-muted" href="./author.html">{{ reply.name }}</a></small>
+
+            <small class="text-muted">{{ reply.date }}</small>
+
+         </div>
+      
+         {% comment %} <div class="col-md-6 d-none d-md-block pr-0" style="background-size: 300px 300px; background-image:url({{ content.2.link }});>	</div> {% endcomment %}
+         <img src={{ reply.link }} style="height:300px; width:250px;" alt=""/>
+         
+      </div>
+   </div>
+      <hr>
+   {% endfor %}
+   {% endif %}
+   Add Your Reply 
+
+   <div class="jumbotron jumbotron-fluid mb-3 pt-0 pb-0 bg-grey position-relative">
+
+      <center>
+         <form method="POST" action="./" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form">
+            <hr>
+            {% comment %} <label>Title : <input type="text" name="title"></input></label>
+            <hr> {% endcomment %}
+            {% comment %} <label>Tags : <input type="text" name="tags" placeholder="Ex: python,java,IT,buisness,etc."></input></label>
+            <hr> {% endcomment %}
+            <label>Answer : <textarea name="answer" required></textarea></label>
+            <hr>
+            <label>Author Name : <input type="text" name="author_name" placeholder="You can be Anonymous" required></input></label>
+            <hr>
+            <label>Add an Image : <input type="file" name="image"></input></label>
+            <hr>
+            <label>Time is : <span id="time"></label>
+         </div>
+         <br>
+         <button type="submit" name="submit" value="reply">Submit</button>
+      </form>
+      </center>
+   </div>
+   
+</div>
+<script>
+   var datetime = new Date();
+   document.getElementById("time").textContent = datetime;
+</script>
+{% endblock body %}

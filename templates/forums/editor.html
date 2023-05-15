@@ -6,10 +6,12 @@
       <h1>
          Add a New Forum !
       </h1>
+      <div class="jumbotron jumbotron-fluid mb-3 pt-0 pb-0 bg-grey position-relative">
+
       <center>
          <form method="POST" action="./" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form" style="border:outset;">
+            <div class="form">
             <hr>
             <label>Title : <input type="text" name="title"></input></label>
             <hr>
@@ -29,6 +31,7 @@
          <button type="submit" name="submit">Submit</button>
       </form>
       </center>
+   </div>
    </div>
    <script>
       var datetime = new Date();
